@@ -36,6 +36,7 @@ include('includes/header.php');
     </table>
     <br>
 
+
     <h2>Add Category</h2>
     <form action="add_category.php" method="post"
           id="add_category_form">

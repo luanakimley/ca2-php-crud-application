@@ -97,6 +97,10 @@ br {
   margin-top: 1em;
 }
 
+img {
+  width: 200px;
+}
+
 /********************************************************************
 * Additional styles for the record Manager application
 ********************************************************************/
@@ -120,4 +124,19 @@ br {
   content: "";
   display: table;
   clear: both;
+}
+
+#addButton {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 999;
+  color: white;
+
+  i {
+    position: absolute;
+    z-index: 1000;
+    cursor: pointer;
+    color: white;
+  }
 }

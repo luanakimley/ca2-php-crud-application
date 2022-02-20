@@ -56,6 +56,18 @@ $statement3->closeCursor();
     </a>
 
     <!-- Divider -->
+    <hr class="sidebar-divider my-0" />
+
+
+        <li class="nav-item active">
+            <a class="nav-link collapsed" href="category_list.php">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Manage Categories</span>
+            </a>
+        </li>
+
+
+    <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Categories List -->
@@ -130,27 +142,39 @@ $statement3->closeCursor();
     
     <?php foreach ($records as $record) : ?>
         <!-- Expense Card -->
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-xl-3 col-md-6 mb-4 ">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
+                        <div class="h5 mb-0 text-xs text-gray-500 mb-2">
+                                <?php echo $record['date']; ?>
+                            </div>
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             <?php echo $record['categoryName']; ?>
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 €<?php echo $record['amount']; ?>
                             </div>
+                            <p class="mt-3"><?php echo $record['note']; ?></p>
                         </div>
                         <div class="col-auto">
                             <i class="<?php echo $record['icon']; ?> fa-2x text-gray-300"></i>
                         </div>
+   
+                        
+                        <img src="<?php 
+                            if ($record['image'] != NULL) {echo "image_uploads/".$record["image"];} else {echo "image_uploads/error.png";} ?>" >
                     </div>
                 </div>
             </div>
         </div>
         
         <?php endforeach; ?>
+
+        <div id="addButton" class="btn btn-circle btn-primary btn-lg" data-toggle="tooltip" data-placement="left" title="Add Transaction">
+        <a href="add_record_form.php"><i class="fa-solid fa-plus" style="color: white"></i></a>
+        </div>
 
     </div>
 <!-- /.container-fluid -->

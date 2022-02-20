@@ -4247,7 +4247,7 @@ input[type="submit"].btn-block {
 .card-body {
   flex: 1 1 auto;
   min-height: 1px;
-  padding: 1.25rem;
+  padding: 1rem;
 }
 .card-title {
   margin-bottom: 0.75rem;
@@ -9537,6 +9537,7 @@ a:focus {
   text-align: center;
   margin-bottom: 1rem;
   cursor: pointer;
+  overflow-y: scroll;
 }
 .sidebar #sidebarToggle::after {
   font-weight: 900;
@@ -9552,8 +9553,9 @@ a:focus {
 }
 .sidebar.toggled {
   width: 0 !important;
-  overflow: hidden;
+  overflow-y: scroll;
 }
+
 .sidebar.toggled #sidebarToggle::after {
   content: "\f105";
   font-family: "Font Awesome 5 Free";
@@ -10033,9 +10035,7 @@ form.user .btn-user {
 .error {
   color: #5a5c69;
   font-size: 7rem;
-  position: relative;
   line-height: 1;
-  width: 12.5rem;
 }
 @-webkit-keyframes noise-anim {
   0% {

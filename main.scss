@@ -99,6 +99,7 @@ br {
 
 img {
   width: 200px;
+  padding: 0;
 }
 
 /********************************************************************
@@ -139,4 +140,20 @@ img {
     cursor: pointer;
     color: white;
   }
+}
+
+.edit-delete-icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.no-transactions-found {
+  display: flex;
+  height: 70vh;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  flex-direction: column;
+  font-size: x-large;
 }

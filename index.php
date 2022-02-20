@@ -108,9 +108,7 @@ $statement3->closeCursor();
 
 
     <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
+    
 
 </ul>
 <!-- End of Sidebar -->
@@ -161,10 +159,27 @@ $statement3->closeCursor();
                         <div class="col-auto">
                             <i class="<?php echo $record['icon']; ?> fa-2x text-gray-300"></i>
                         </div>
-   
                         
                         <img src="<?php 
-                            if ($record['image'] != NULL) {echo "image_uploads/".$record["image"];} else {echo "image_uploads/error.png";} ?>" >
+                            if ($record['image'] != NULL) {echo "image_uploads/".$record["image"];} else {echo "image_uploads/error.png";} ?>" class="p-0 rounded">
+
+                        <div class="d-flex align-items-center mb-4 mt-2 ml-0">
+                                <span class="mt-2 text-xs font-weight-bold text-primary text-uppercase">Payment type:</span>
+                                <p class="mb-0 mt-2 ml-2 text-s"><?php echo $record['paymentType']?></p>       
+                        </div>  
+
+                        <div class="edit-delete-icon mt-5 position-absolute fixed-bottom mb-2">
+                            <form action="edit_transaction_form.php" method="post"> 
+                                <input type="hidden" name="expense_id" value="<?php echo $record['expenseID']; ?>">
+                                <input type="hidden" name="category_id" value="<?php echo $record['categoryID']; ?>">
+                                <button class="btn btn-circle" type="submit"> <i class="fa-solid fa-pencil"></i></button>
+                            </form>
+                            <form action="delete_transaction.php" method="post">
+                                <input type="hidden" name="expense_id" value="<?php echo $record['expenseID']; ?>">
+                                <input type="hidden" name="category_id"value="<?php echo $record['categoryID']; ?>">
+                                <button class="btn btn-circle" type="submit"><i class='fa-solid fa-trash-can'></i></button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -172,9 +187,19 @@ $statement3->closeCursor();
         
         <?php endforeach; ?>
 
-        <div id="addButton" class="btn btn-circle btn-primary btn-lg" data-toggle="tooltip" data-placement="left" title="Add Transaction">
-        <a href="add_record_form.php"><i class="fa-solid fa-plus" style="color: white"></i></a>
-        </div>
+        <?php 
+            if(empty($records)) {
+                echo 
+                "<div class='no-transactions-found p-5'>
+                    <i class='fa-solid fa-face-frown p-4'></i>
+                    <p>No transactions found</p>
+                </div>";
+            };
+        ?>
+
+        <a href="add_transaction_form.php"><div id="addButton" class="btn btn-circle btn-primary btn-lg" data-toggle="tooltip" data-placement="left" title="Add Transaction">
+        <i class="fa-solid fa-plus" style="color: white"></i>
+        </div></a>
 
     </div>
 <!-- /.container-fluid -->

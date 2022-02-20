@@ -3,11 +3,10 @@ require_once('database.php');
 
 // Get category ID
 if (!isset($category_id)) {
-$category_id = filter_input(INPUT_GET, 'category_id', 
-FILTER_VALIDATE_INT);
-if ($category_id == NULL || $category_id == FALSE) {
-$category_id = 1;
-}
+    $category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
+    if ($category_id == NULL || $category_id == FALSE) {
+        $category_id = 1;
+    }
 }
 
 // Get name for current category
@@ -19,9 +18,11 @@ $statement1->execute();
 $category = $statement1->fetch();
 $statement1->closeCursor();
 $category_name = $category['categoryName'];
+$category_icon = $category['icon'];
 
 // Get all categories
 $queryAllCategories = 'SELECT * FROM categories
+WHERE parentID IS NULL
 ORDER BY categoryID';
 $statement2 = $db->prepare($queryAllCategories);
 $statement2->execute();
@@ -29,44 +30,70 @@ $categories = $statement2->fetchAll();
 $statement2->closeCursor();
 
 // Get records for selected category
-$queryRecords = "SELECT * FROM records
-WHERE categoryID = :category_id
-ORDER BY recordID";
+$queryRecords = "SELECT * FROM expenses e, categories c
+WHERE e.categoryID = c.categoryID AND 
+(e.categoryID = :category_id OR c.parentID = :category_id)
+ORDER BY e.date;";
 $statement3 = $db->prepare($queryRecords);
 $statement3->bindValue(':category_id', $category_id);
 $statement3->execute();
 $records = $statement3->fetchAll();
 $statement3->closeCursor();
+
 ?>
 
 <?php include('includes/header.php'); ?>
 
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
 
     <!-- Sidebar - Categories -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-icons"></i>
+            <i class="fa-solid fa-icons"></i>
         </div>
         <div class="sidebar-brand-text mx-3">Categories</div>
     </a>
 
     <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+    <hr class="sidebar-divider">
 
     <!-- Categories List -->
     <?php foreach ($categories as $category) : ?>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            <?php echo $category['categoryName']; ?>
+        </div>
     <li class="nav-item active">
-        <a class="nav-link" href=".?category_id=<?php echo $category['categoryID']; ?>">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+        <a class="nav-link collapsed" href=".?category_id=<?php echo $category['categoryID']; ?>" >
+            <i class="<?php echo $category['icon'];?>"></i>
             <span><?php echo $category['categoryName']; ?></span>
         </a>
+        
+            <?php 
+                $querySubcategories = 'SELECT * FROM categories
+                WHERE parentID IS NOT NULL AND parentID = :category_id
+                ORDER BY categoryID';
+                $statement4 = $db->prepare($querySubcategories);
+                $statement4->bindValue(':category_id', $category['categoryID']);
+                $statement4->execute();
+                $subcategories = $statement4->fetchAll();
+                $statement4->closeCursor();
+            
+                foreach ($subcategories as $subcategory) : 
+            ?>
+                <a class="nav-link opacity-75"  href=".?category_id=<?php echo $subcategory['categoryID'];?>" >
+                    <span ><?php echo $subcategory['categoryName']; ?></span>
+                </a>
+            <?php endforeach; ?>
+     
+ 
     </li>
+
+    <hr class="sidebar-divider">
     <?php endforeach; ?>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
@@ -86,54 +113,47 @@ $statement3->closeCursor();
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
-    <h1 class="ml-2">Expenses Tracker</h1>
+    <h1 class="ml-2">Expense Tracker</h1>
 </nav>
 
 <!-- End of Topbar -->
 
 
+ <!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800"><i class="<?php echo $category_icon; ?> mr-3"></i><?php echo $category_name; ?></h1>
+    </div>
 
-<section>
-<!-- display a table of records -->
-<h2><?php echo $category_name; ?></h2>
-    <table>
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Delete</th>
-            <th>Edit</th>
-        </tr>
-        <?php foreach ($records as $record) : ?>
-        <tr>
-            <td>
-                <img src="image_uploads/<?php echo $record['image']; ?>" width="100px" height="100px" />
-            </td>
-            <td>
-                <?php echo $record['name']; ?>
-            </td>
-            <td class="right">
-                <?php echo $record['price']; ?>
-            </td>
-            <td>
-                <form action="delete_record.php" method="post" id="delete_record_form">
-                    <input type="hidden" name="record_id"value="<?php echo $record['recordID']; ?>">
-                    <input type="hidden" name="category_id"value="<?php echo $record['categoryID']; ?>">
-                    <input type="submit" value="Delete">
-                </form>
-            </td>
-            <td>
-                <form action="edit_record_form.php" method="post" id="delete_record_form">
-                    <input type="hidden" name="record_id"value="<?php echo $record['recordID']; ?>">
-                    <input type="hidden" name="category_id"value="<?php echo $record['categoryID']; ?>">
-                    <input type="submit" value="Edit">
-                </form>
-            </td>
-        </tr>
+    <div class="row">
+    
+    <?php foreach ($records as $record) : ?>
+        <!-- Expense Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            <?php echo $record['categoryName']; ?>
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                €<?php echo $record['amount']; ?>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="<?php echo $record['icon']; ?> fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <?php endforeach; ?>
-    </table>
-<p><a href="add_record_form.php">Add Record</a></p>
-<p><a href="category_list.php">Manage Categories</a></p>
-</section>
+
+    </div>
+<!-- /.container-fluid -->
+</div>   
 
 <?php include('includes/footer.php');?>

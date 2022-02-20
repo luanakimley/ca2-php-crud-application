@@ -1,5 +1,5 @@
 <?php
-    $dsn = 'mysql:host=localhost;dbname=ca2shop';
+    $dsn = 'mysql:host=localhost;dbname=expense_tracker';
     $username = 'root';
     $password = '';
 

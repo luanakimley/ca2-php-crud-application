@@ -59,7 +59,7 @@ CREATE TABLE `expenses` (
   `expenseID` int(11) NOT NULL AUTO_INCREMENT,
   `amount` decimal(10,2) NOT NULL,
   `categoryID` int(11) NOT NULL,
-  `note` varchar(255) NOT NULL,
+  `note` varchar(255),
   `date` DATE NOT NULL,
   `paymentType` varchar(50) NOT NULL,
   `image` varchar(255),

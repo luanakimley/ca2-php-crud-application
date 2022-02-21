@@ -10,7 +10,7 @@ $paymentType = filter_input(INPUT_POST, 'paymentType');
 
 // Validate inputs
 if ($expense_id == NULL || $category_id == null || $category_id == false ||
-    $amount == null || $note == null || $date == false || $paymentType == null) {
+    $amount == null || $date == false || $paymentType == null) {
     $error = "Invalid product data. Check all fields and try again.";
     include('error.php');
     exit();

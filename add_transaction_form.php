@@ -78,7 +78,7 @@ include('includes/header.php');
             </div>
 
             <div class="form-group">
-            <label>Note:</label>
+            <label>Note <em>(optional)</em>:</label>
             <input type="input" name="note" class="form-control" id="inputdefault">
             <br>    
             </div>    
@@ -90,7 +90,7 @@ include('includes/header.php');
             </div>   
             
             <div class="form-group">
-            <label>Image:</label>
+            <label>Image <em>(optional)</em>:</label>
             <input type="file" class="form-control" name="image" accept="image/*" />
             <br>
             </div> 

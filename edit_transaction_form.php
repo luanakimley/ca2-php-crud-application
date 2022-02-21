@@ -1,6 +1,7 @@
 <?php
 require('database.php');
 
+// Get expense
 $expense_id = filter_input(INPUT_POST, 'expense_id', FILTER_VALIDATE_INT);
 $query = 'SELECT *
           FROM expenses
@@ -11,6 +12,7 @@ $statement->execute();
 $expenses = $statement->fetch(PDO::FETCH_ASSOC);
 $statement->closeCursor();
 
+// Get categories
 $query2 = 'SELECT *
           FROM categories
           ORDER BY categoryID';
@@ -94,7 +96,7 @@ include('includes/header.php');
             </div>
 
             <div class="form-group">
-            <label>Note:</label>
+            <label>Note <em>(optional)</em>:</label>
             <input type="input" name="note" class="form-control" id="inputdefault" value="<?php echo $expenses['note'] ?>">
             <br>    
             </div>    
@@ -106,7 +108,7 @@ include('includes/header.php');
             </div>   
             
             <div class="form-group">
-            <label>Image:</label>
+            <label>Image <em>(optional)</em>: </label>
             <input type="file" class="form-control" name="image" accept="image/*" />
 
             <?php if ($expenses['image'] != "") { ?>

@@ -1,7 +1,6 @@
 <!-- the head section -->
 <head>
     <title>Expense Tracker</title>
-    <link rel="stylesheet" href="main.scss">
 
     <!-- jQuery Script -->
     <script src="https://code.jquery.com/jquery-1.12.0.js"></script>
@@ -15,6 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- Custom styles for this template-->
+    <link type="text/css" href="scss/sb-admin-2.css" rel="stylesheet">
     <link type="text/css" href="css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Optional JavaScript -->

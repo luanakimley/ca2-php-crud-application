@@ -82,3 +82,4 @@ if ($category_id == null || $category_id == false ||
     header("location: index.php");
     exit;
 }
+?>

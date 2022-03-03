@@ -73,25 +73,25 @@ include('includes/header.php');
 
             <div class="form-group">
             <label>Amount:</label>
-            <input type="input" name="amount" class="form-control" id="inputdefault">
-            <br>
+            <input type="input" name="amount" class="form-control" id="amount" required onBlur="amountValidation(); inputsAllValid()">
+            <p class="text-danger mt-2" id="amountError"></p>
             </div>
 
             <div class="form-group">
             <label>Note <em>(optional)</em>:</label>
-            <input type="input" name="note" class="form-control" id="inputdefault">
-            <br>    
+            <input placeholder="Some details about the transaction" type="input" name="note" class="form-control" id="note">
+ 
             </div>    
 
             <div class="form-group">
             <label>Date:</label>
-            <input type="date" name="date" class="form-control" id="inputdefault">
-            <br>    
+            <input type="date" name="date" class="form-control" id="date" required onBlur="dateValidation(); inputsAllValid()" max="<?php echo date("Y-m-d"); ?>">
+            <p class="text-danger mt-2" id="dateError"></p>
             </div>   
             
             <div class="form-group">
             <label>Image <em>(optional)</em>:</label>
-            <input type="file" class="form-control" name="image" accept="image/*" />
+            <input type="file" class="form-control" name="image" accept="image/*"  />
             <br>
             </div> 
             
@@ -100,21 +100,22 @@ include('includes/header.php');
             <label class="w-100">Payment Type:</label>
             <br>
             <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="paymentType" value="Debit Card">
+            <input onBlur="paymentTypeValidation(); inputsAllValid()" class="form-check-input" type="radio" name="paymentType" value="Debit Card" id="debitCard">
             <p class="form-check-label" for="inlineRadio1">Debit Card</p>
             </div>
             <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="paymentType" value="Credit Card">
+            <input onBlur="paymentTypeValidation(); inputsAllValid()" class="form-check-input" type="radio" name="paymentType" value="Credit Card" id="creditCard">
             <p class="form-check-label" for="inlineRadio2">Credit Card</p>
             </div>
             <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="paymentType" value="Cash">
+            <input onBlur="paymentTypeValidation(); inputsAllValid()" class="form-check-input" type="radio" name="paymentType" value="Cash" id="cash">
             <p class="form-check-label" for="inlineRadio3">Cash</p>
             </div>
+            <p class="text-danger mt-2" id="paymentTypeError"></p>
             </div>
             
             <div class="form-group">
-            <button type="submit" class="btn btn-outline-success mt-5 btn-block">Add Transaction</button>
+            <button id="submitButton" type="submit" class="btn btn-outline-success mt-5 btn-block">Add Transaction</button>
             <br>
 
             

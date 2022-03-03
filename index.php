@@ -131,6 +131,11 @@ $statement3->closeCursor();
 
  <!-- Begin Page Content -->
 <div class="container-fluid">
+
+        <a href="add_transaction_form.php"><div id="addButton" class="btn btn-circle btn-primary btn-lg" data-toggle="tooltip" data-placement="left" title="Add Transaction">
+        <i class="fa-solid fa-plus" style="color: white"></i>
+        </div></a>
+
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><i class="<?php echo $category_icon; ?> mr-3"></i><?php echo $category_name; ?></h1>
@@ -163,7 +168,7 @@ $statement3->closeCursor();
                         <img src="<?php 
                             if ($record['image'] != NULL) {echo "image_uploads/".$record["image"];} else {echo "image_uploads/error.png";} ?>" class="p-0 rounded">
 
-                        <div class="d-flex align-items-center mb-4 mt-2 ml-0">
+                        <div class="d-flex align-items-center mb-4 mt-2 ml-0 pl-0">
                                 <span class="mt-2 text-xs font-weight-bold text-primary text-uppercase">Payment type:</span>
                                 <p class="mb-0 mt-2 ml-2 text-s"><?php echo $record['paymentType']?></p>       
                         </div>  
@@ -197,9 +202,7 @@ $statement3->closeCursor();
             };
         ?>
 
-        <a href="add_transaction_form.php"><div id="addButton" class="btn btn-circle btn-primary btn-lg" data-toggle="tooltip" data-placement="left" title="Add Transaction">
-        <i class="fa-solid fa-plus" style="color: white"></i>
-        </div></a>
+        
 
     </div>
 <!-- /.container-fluid -->

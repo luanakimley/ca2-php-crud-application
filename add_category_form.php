@@ -64,7 +64,7 @@ include('includes/header.php');
 
   
             <label>Category name:</label>
-            <input type="input" name="categoryName" class="form-control" id="inputdefault">
+            <input type="input" name="categoryName" class="form-control"  required>
             <br>
 
             <div class="form-group">
@@ -83,7 +83,7 @@ include('includes/header.php');
             <br>           
 
             <label>Choose parent category:</label>
-            <select name="parentCategory" class="form-select" disabled>
+            <select name="parentCategory" class="form-select" disabled required>
             <option selected disabled >
             <?php foreach ($categories as $category) : ?>
                 <option value="<?php echo $category['categoryID']; ?>">
@@ -95,7 +95,7 @@ include('includes/header.php');
             <br>
 
             <label>Icon class name <em>(optional)</em>:</label>
-            <input type="input" name="icon" class="form-control" id="inputdefault">
+            <input type="input" name="icon" class="form-control" id="inputdefault" placeholder="Font Awesome icon class name">
 
             <script>
                 $('input[name="type"]').on('change', function() {

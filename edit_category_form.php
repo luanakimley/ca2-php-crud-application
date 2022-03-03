@@ -77,7 +77,7 @@ include('includes/header.php');
             <input type="hidden" name="category_id" value="<?php echo $category['categoryID']; ?>">
   
             <label>Category name:</label>
-            <input type="input" name="categoryName" class="form-control" id="inputdefault" value="<?php echo $category['categoryName'] ?>">
+            <input type="input" name="categoryName" class="form-control" id="inputdefault" value="<?php echo $category['categoryName'] ?>" required>
             <br>
 
             <div class="form-group">

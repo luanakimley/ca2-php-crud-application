@@ -63,9 +63,9 @@ include('includes/header.php');
             <th>Category ID</th>
             <th>Category Name</th>
             <th>Parent ID</th>
-            <th></th>
-            <th></th>
             <th>Icon</th>
+            <th></th>
+            <th></th>
         </thead>
         <tbody>
             <?php foreach ($categories as $category) : ?>
@@ -73,6 +73,7 @@ include('includes/header.php');
                 <td><?php echo $category['categoryID']; ?></td>
                 <td><?php echo $category['categoryName']; ?></td>
                 <td><?php echo $category['parentID']; ?></td>
+                <td><?php echo $category['icon']; ?></td>
                 <td>
                     <form action="edit_category_form.php" method="post">
                         <input type="hidden" name="category_id"
@@ -86,7 +87,6 @@ include('includes/header.php');
                         <button class="btn btn-circle btn-sm" type="submit"><i class='fa-solid fa-trash-can'></i></button>
                     </form>
                 </td>
-                <td><?php echo $category['icon']; ?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>

@@ -7,7 +7,7 @@ A PHP CRUD (Create, Read, Update, Delete) Application for users to track their d
 
 ## Features
 
-- View transactions :eyes:
+- ### View transactions :eyes:
 
   - #### Filter transactions by category :card_index_dividers:
     ![Expense Tracker Preview](https://media.giphy.com/media/nkbHMcyH77dkE98t5z/giphy.gif)

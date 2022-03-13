@@ -7,31 +7,36 @@ A PHP CRUD (Create, Read, Update, Delete) Application for users to track their d
 
 ## Features
 
-- ### View transactions
-  - #### Filter transaction by category
+- View transactions :eyes:
+
+  - #### Filter transactions by category :card_index_dividers:
     ![Expense Tracker Preview](https://media.giphy.com/media/nkbHMcyH77dkE98t5z/giphy.gif)
-- ### Add transaction
+
+- ### Add transaction :heavy_plus_sign:
+
   ![add transaction](https://media.giphy.com/media/AJ9kCPpErJjUeQByaz/giphy.gif)
-- ### Edit transaction
+
+- ### Edit transaction :pencil2:
 
   ![edit transaction](https://media.giphy.com/media/WNpuyMVmPXUM56d5kf/giphy.gif)
 
-- ### Delete transaction
+- ### Delete transaction :wastebasket:
 
   ![delete transaction](https://media.giphy.com/media/l3GLG75b3iAwGTm4g2/giphy.gif)
 
-- ### Search transactions
+- ### Search transactions :mag_right:
 
   ![search transaction](https://media.giphy.com/media/dYnJFcHyFlY9fruq5H/giphy.gif)
 
-- ### Manage categories
-  - #### View all categories
+- ### Manage categories :gear:
+
+  - #### View all categories :eyes:
     ![view all categories](https://media.giphy.com/media/cUEN8zRNO8h6jCFr7N/giphy.gif)
-  - #### Add category
+  - #### Add category :heavy_plus_sign:
     ![add category](https://media.giphy.com/media/xGrVVWi0gSxBZWaWiU/giphy.gif)
-  - #### Edit category
+  - #### Edit category :pencil2:
     ![edit category](https://media.giphy.com/media/U61j0r6qAt5fTY2Es6/giphy.gif)
-  - #### Delete category
+  - #### Delete category :wastebasket:
     ![delete category](https://media.giphy.com/media/HqU07XAKYH227znkCT/giphy.gif)
 
 ---

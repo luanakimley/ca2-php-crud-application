@@ -190,9 +190,13 @@ if (isset($_POST['search_submit'])) {
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><i class="<?php echo $category_icon; ?> mr-3"></i><?php echo $category_name; ?></h1>
+        <p class="mr-2 mt-5"><?php echo count($records) ?> transactions found</p>
     </div>
 
+    
+
     <div class="row">
+
     
     <?php foreach ($records as $record) : ?>
         <!-- Expense Card -->

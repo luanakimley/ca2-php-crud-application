@@ -64,7 +64,7 @@ if (isset($_POST['search_submit'])) {
     $statement4->execute();
     $records = $statement4->fetchAll();
     $statement4->closeCursor();
-    $category_name = 'Search results';
+    $category_name = 'Search results for \''.$queryString.'\'';
     $category_icon = 'fa-solid fa-search';
 }
 

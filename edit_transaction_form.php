@@ -66,7 +66,8 @@ include('includes/header.php');
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
-    <h1 class="ml-2">Expense Tracker</h1>
+    <img src="./vendor/images/expense-tracker-logo.png" alt="Expense Tracker Logo" width="300">
+
 </nav>
 
     <div class="container shadow mb-4">
@@ -109,7 +110,7 @@ include('includes/header.php');
             
             <div class="form-group">
             <label>Image <em>(optional)</em>: </label>
-            <input type="file" class="form-control" name="image" accept="image/*" />
+            <input  accept=".jpg,.jpeg,.png,.gif" type="file" class="form-control" name="image" accept="image/*" />
 
             <?php if ($expenses['image'] != "") { ?>
             <img src="image_uploads/<?php echo $expenses['image']; ?>" class="mt-2 rounded text-center" />

@@ -65,7 +65,8 @@ include('includes/header.php');
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
-    <h1 class="ml-2">Expense Tracker</h1>
+    <img src="./vendor/images/expense-tracker-logo.png" alt="Expense Tracker Logo" width="300">
+
 </nav>
 
     <div class="container shadow mb-4">

@@ -40,6 +40,22 @@ $statement3->execute();
 $records = $statement3->fetchAll();
 $statement3->closeCursor();
 
+// Get records for searched transaction
+
+if (isset($_POST['search_submit'])) {
+    $querySearch = "SELECT * FROM expenses e, categories c
+    WHERE e.categoryID = c.categoryID AND note LIKE :queryString";
+    $queryString = $_POST['search'];
+    $statement4 = $db->prepare($querySearch);
+    $statement4->bindValue(':queryString', '%'.$queryString.'%');
+    $statement4->execute();
+    $records = $statement4->fetchAll();
+    $statement4->closeCursor();
+    $category_name = 'Search results';
+    $category_icon = 'fa-solid fa-search';
+}
+
+
 ?>
 
 <?php include('includes/header.php'); ?>
@@ -118,12 +134,24 @@ $statement3->closeCursor();
 <div id="content-wrapper" class="d-flex flex-column">
 
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow d-flex justify-content-between">
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
     <h1 class="ml-2">Expense Tracker</h1>
+
+     <!-- Topbar Search -->
+     <form class="d-none d-sm-inline-block form-inline navbar-search" method="post">
+        <div class="input-group">
+            <input name="search" type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" name="search_submit" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+        </div>
+    </form>                        
 </nav>
 
 <!-- End of Topbar -->

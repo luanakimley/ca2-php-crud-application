@@ -92,8 +92,8 @@ include('includes/header.php');
 
             <div class="form-group">
             <label>Amount:</label>
-            <input type="input" name="amount" class="form-control" id="inputdefault" value="<?php echo $expenses['amount'] ?>" >
-            <br>
+            <input pattern="^(0*[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*)$" type="input" name="amount" class="form-control" id="amount" value="<?php echo $expenses['amount'] ?>" required onBlur="amountValidation(); inputsAllValid()" >
+            <p class="text-danger mt-2" id="amountError"></p>
             </div>
 
             <div class="form-group">
@@ -104,8 +104,8 @@ include('includes/header.php');
 
             <div class="form-group">
             <label>Date:</label>
-            <input type="date" name="date" class="form-control" id="inputdefault" value="<?php echo $expenses['date'] ?>">
-            <br>    
+            <input type="date" name="date" class="form-control" id="date"  required onBlur="dateValidation(); inputsAllValid()" max="<?php echo date("Y-m-d"); ?>" value="<?php echo $expenses['date'] ?>">
+            <p class="text-danger mt-2" id="dateError"></p>
             </div>   
             
             <div class="form-group">
@@ -140,7 +140,7 @@ include('includes/header.php');
             </div>
             
             <div class="form-group">
-            <button type="submit" class="btn btn-outline-success mt-5 btn-block">Edit Transaction</button>
+            <button id="submitButton" type="submit" class="btn btn-outline-success mt-5 btn-block">Edit Transaction</button>
             <br>
 
             </div> 

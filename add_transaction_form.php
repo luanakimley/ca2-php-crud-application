@@ -74,7 +74,7 @@ include('includes/header.php');
 
             <div class="form-group">
             <label>Amount:</label>
-            <input type="input" name="amount" class="form-control" id="amount" required onBlur="amountValidation(); inputsAllValid()">
+            <input pattern="^(0*[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*)$" type="input" name="amount" class="form-control" id="amount" required onBlur="amountValidation(); inputsAllValid()">
             <p class="text-danger mt-2" id="amountError"></p>
             </div>
 

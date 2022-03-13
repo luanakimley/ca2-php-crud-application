@@ -5,7 +5,7 @@ require_once('database.php');
 if (!isset($category_id)) {
     $category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
     if ($category_id == NULL || $category_id == FALSE) {
-        $category_id = 1;
+        $category_id = 0;
     }
 }
 
@@ -17,8 +17,14 @@ $statement1->bindValue(':category_id', $category_id);
 $statement1->execute();
 $category = $statement1->fetch();
 $statement1->closeCursor();
-$category_name = $category['categoryName'];
-$category_icon = $category['icon'];
+if($category_id != 0) {
+    $category_name = $category['categoryName'];
+    $category_icon = $category['icon'];
+} 
+else {
+    $category_name = "All Transactions";
+    $category_icon = "fa-solid fa-money-bill-wave";
+}
 
 // Get all categories
 $queryAllCategories = 'SELECT * FROM categories
@@ -30,10 +36,17 @@ $categories = $statement2->fetchAll();
 $statement2->closeCursor();
 
 // Get records for selected category
-$queryRecords = "SELECT * FROM expenses e, categories c
-WHERE e.categoryID = c.categoryID AND 
-(e.categoryID = :category_id OR c.parentID = :category_id)
-ORDER BY e.date;";
+if($category_id!= 0) {
+    $queryRecords = "SELECT * FROM expenses e, categories c
+    WHERE e.categoryID = c.categoryID AND 
+    (e.categoryID = :category_id OR c.parentID = :category_id)
+    ORDER BY e.date DESC;";
+}
+else {
+    $queryRecords = "SELECT * FROM expenses e, categories c
+    WHERE e.categoryID = c.categoryID 
+    ORDER BY e.date DESC;";
+}
 $statement3 = $db->prepare($queryRecords);
 $statement3->bindValue(':category_id', $category_id);
 $statement3->execute();
@@ -81,6 +94,16 @@ if (isset($_POST['search_submit'])) {
                 <span>Manage Categories</span>
             </a>
         </li>
+    
+        <hr class="sidebar-divider my-0" />
+
+        <li class="nav-item active">
+            <a class="nav-link collapsed" href=".?category_id=0">
+                <i class="fa-solid fa-money-bill-wave"></i>
+                <span>All Transactions</span>
+            </a>
+        </li>
+
 
 
     <!-- Divider -->
@@ -139,7 +162,7 @@ if (isset($_POST['search_submit'])) {
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
-    <h1 class="ml-2">Expense Tracker</h1>
+    <img src="./vendor/images/expense-tracker-logo.png" alt="Expense Tracker Logo" width="300">
 
      <!-- Topbar Search -->
      <form class="d-none d-sm-inline-block form-inline navbar-search" method="post">
